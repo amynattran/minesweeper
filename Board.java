@@ -26,14 +26,19 @@ public class Board {
             int x = Math.floorDiv(bomb, width);
             int y = bomb % width;
             ret[x][y] = -1;
-            if (canAdd(ret, x+1, y)) { ret[x+1][y] ++; }
-            if (canAdd(ret, x+1, y+1)) { ret[x+1][y+1] ++; }
-            if (canAdd(ret, x+1, y-1)) { ret[x+1][y-1] ++; }
-            if (canAdd(ret, x-1, y)) { ret[x-1][y] ++; }
-            if (canAdd(ret, x-1, y+1)) { ret[x-1][y+1] ++; }
-            if (canAdd(ret, x-1, y-1)) { ret[x-1][y-1] ++; }
-            if (canAdd(ret, x, y+1)) { ret[x][y+1] ++; }
-            if (canAdd(ret, x, y-1)) { ret[x][y-1] ++; }
+            for (int j = x-1; j<=x+1; j++) {
+                for (int k = y-1; k <= y+1; k++) {
+                    if (canAdd(ret, j, k)) { ret[j][k] ++; }
+                }
+            }
+            // if (canAdd(ret, x+1, y)) { ret[x+1][y] ++; }
+            // if (canAdd(ret, x+1, y+1)) { ret[x+1][y+1] ++; }
+            // if (canAdd(ret, x+1, y-1)) { ret[x+1][y-1] ++; }
+            // if (canAdd(ret, x-1, y)) { ret[x-1][y] ++; }
+            // if (canAdd(ret, x-1, y+1)) { ret[x-1][y+1] ++; }
+            // if (canAdd(ret, x-1, y-1)) { ret[x-1][y-1] ++; }
+            // if (canAdd(ret, x, y+1)) { ret[x][y+1] ++; }
+            // if (canAdd(ret, x, y-1)) { ret[x][y-1] ++; }
 
         }
         return ret;

@@ -6,17 +6,8 @@ public class Utils {
     {
         Frame frame = new Frame("Example 2");
 
-        // Creating instance of button with label
-        Button button = new Button("Click Here");
-
-        // Setting the position for the button in frame
-        button.setBounds(80, 100, 64, 30);
-
-        // Adding button to the frame
-        frame.add(button);
-
         // setting size, layout and visibility of frame
-        frame.setSize(300, 300);
+        frame.setSize(500, 500);
         frame.setLayout(null);
         frame.setVisible(true);
 
@@ -30,6 +21,7 @@ public class Utils {
         });
 
     }
+    
 
     public int add_nums(int x, int y) {
         return x + y;

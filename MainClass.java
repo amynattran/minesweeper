@@ -1,11 +1,18 @@
-class MainClasss
+class MainClass
 {
     public static void main(String[] args)
     {
-        Board gameBoard = new Board(10,15,45);
-        System.out.println();
-        gameBoard.printBoard();
-        Utils util = new Utils();
-        System.out.println(util.add_nums(3,5));
+        int height = 13;
+        int width = 10;
+        int numBombs = 25;
+
+        Board gameBoard = new Board(height,width,numBombs);
+        // System.out.println();
+        // gameBoard.printBoard();
+
+        GUI gui = new GUI(height, width, gameBoard);
+        
+        gui.frame.setVisible(true);
+
     }
 }
