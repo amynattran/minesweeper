@@ -3,7 +3,7 @@ class MainClass
     public static void main(String[] args)
     {
         int height = 13;
-        int width = 10;
+        int width = 15;
         int numBombs = 25;
 
         Board gameBoard = new Board(height,width,numBombs);

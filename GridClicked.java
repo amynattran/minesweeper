@@ -8,15 +8,24 @@ public class GridClicked implements MouseListener {
         GameButton button = (GameButton) e.getComponent();
 
         if (SwingUtilities.isLeftMouseButton(e)) {
-            button.setLabel(Integer.toString(button.getNum()));
-            if (button.getNum() == 0) {
-                Frame frame = (Frame) button.getParent();
-                frame.remove(button);
+            button.setText(Integer.toString(button.getNumBombs()));
+            if (button.getNumBombs() == -1){
+                JPanel panel = (JPanel) button.getParent();
+                // panel.add(new JLabel("GAME OVER!"));
+                GridLayout layout = (GridLayout) panel.getLayout();
+                layout.addLayoutComponent(null, new JLabel("GAME OVER!"));
+            } else {
+                button.exposeEmpty();
             }
-            System.out.println("left clicked " + button.getNum());
+            // System.out.println("left clicked " + button.getNumBombs());
         } else if (SwingUtilities.isRightMouseButton(e)) {
-            System.out.println("right clicked " + button.getNum());
-            button.setLabel("X");
+            // System.out.println("right clicked " + button.getNumBombs());
+            if (button.getText() == "X") {
+                button.setText("");
+            } else {
+                button.setText("X");
+            }
+            
         }
     }
 

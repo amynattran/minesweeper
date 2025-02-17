@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,9 @@ public class Board {
     int width;
 
     Board(int height, int width, int numBombs) {
+        assert width > 3: "Board not wide enough";
+        assert height > 3: "Board not tall enough";
+
         this.numBombs = numBombs;
         this.height = height;
         this.width = width;
@@ -21,8 +25,14 @@ public class Board {
         int[][] ret = new int[height][width];
         List<Integer> allLocs = IntStream.range(1, height * width).boxed().collect(Collectors.toList());;
         Collections.shuffle(allLocs);
+
+        ArrayList<Integer> avoid = shouldAvoid(width, height);
         for(int i = 0; i < numBombs; i++) {
             Integer bomb = allLocs.get(i);
+            if (avoid.contains(bomb)) {
+                numBombs++;
+                continue;
+            }
             int x = Math.floorDiv(bomb, width);
             int y = bomb % width;
             ret[x][y] = -1;
@@ -67,5 +77,26 @@ public class Board {
             }
             System.out.println();
         }
+    }
+    private static ArrayList<Integer> shouldAvoid(int width, int height) {
+        ArrayList<Integer> ret = new ArrayList<Integer>();
+        int midX = Math.floorDiv(width, 2);
+        int midY = Math.floorDiv(height, 2);
+
+        ret.add(getLocation(midX, midY, width));
+        ret.add(getLocation(midX-1, midY, width));
+        ret.add(getLocation(midX-1, midY-1, width));
+        ret.add(getLocation(midX-1, midY+1, width));
+        ret.add(getLocation(midX+1, midY, width));
+        ret.add(getLocation(midX+1, midY-1, width));
+        ret.add(getLocation(midX+1, midY+1, width));
+        ret.add(getLocation(midX, midY-1, width));
+        ret.add(getLocation(midX, midY+1, width));
+
+        return ret;
+    }
+
+    private static int getLocation(int x, int y, int width) {
+        return y * width + x;
     }
 }
